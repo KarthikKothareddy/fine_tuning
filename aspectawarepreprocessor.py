@@ -2,6 +2,7 @@
 import imutils
 import cv2
 
+
 class AspectAwarePreprocessor:
 	def __init__(self, width, height, inter=cv2.INTER_AREA):
 		# store the target image width, height, and interpolation

@@ -3,6 +3,7 @@ from keras.layers.core import Dropout
 from keras.layers.core import Flatten
 from keras.layers.core import Dense
 
+
 class FCHeadNet:
 	@staticmethod
 	def build(baseModel, classes, D):

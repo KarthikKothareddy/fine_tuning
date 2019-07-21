@@ -8,10 +8,10 @@ sys.path.append("..")
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from fine_tuning.pyimagesearch.preprocessing import ImageToArrayPreprocessor
-from fine_tuning.pyimagesearch.preprocessing import AspectAwarePreprocessor
-from fine_tuning.pyimagesearch.datasets import SimpleDatasetLoader
-from fine_tuning.pyimagesearch.nn.conv import FCHeadNet
+from fine_tuning.imagetoarraypreprocessor import ImageToArrayPreprocessor
+from fine_tuning.aspectawarepreprocessor import AspectAwarePreprocessor
+from fine_tuning.simpledatasetloader import SimpleDatasetLoader
+from fine_tuning.fcheadnet import FCHeadNet
 from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import RMSprop
 from keras.optimizers import SGD
