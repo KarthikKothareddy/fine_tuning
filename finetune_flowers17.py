@@ -88,12 +88,18 @@ followed by a softmax classifier
 
 headModel = FCHeadNet.build(baseModel, len(classNames), 256)
 
-# place the head FC model on top of the base model -- this will
-# become the actual model we will train
+"""
+Step-3: place the head FC model on top of the base model -- this will 
+become the actual model we will train
+"""
+
 model = Model(inputs=baseModel.input, outputs=headModel)
 
-# loop over all layers in the base model and freeze them so they
-# will *not* be updated during the training process
+"""
+Step-4: Loop over all layers in the base model and freeze them so that 
+they will "NOT" be updated during the training process
+"""
+
 for layer in baseModel.layers:
 	layer.trainable = False
 
@@ -107,10 +113,12 @@ model.compile(
 	metrics=["accuracy"]
 )
 
-# train the head of the network for a few epochs (all other
-# layers are frozen) -- this will allow the new FC layers to
-# start to become initialized with actual "learned" values
-# versus pure random
+"""
+Step-5: Train the head of the network for a few epochs (all other layers 
+are frozen) -- this will allow the new FC layers to start to become 
+initialized with actual "learned" values versus pure random
+"""
+
 print("[INFO] training head...")
 model.fit_generator(
 	aug.flow(trainX, trainY, batch_size=32),
