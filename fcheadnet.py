@@ -15,7 +15,6 @@ class FCHeadNet:
 		:param D: Number of layers in Dense layer
 		:return:
 		"""
-		# i
 		headModel = baseModel.output
 		headModel = Flatten(name="flatten")(headModel)
 		headModel = Dense(D, activation="relu")(headModel)

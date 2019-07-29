@@ -71,17 +71,21 @@ data = data.astype("float") / 255.0
 trainY = LabelBinarizer().fit_transform(trainY)
 testY = LabelBinarizer().fit_transform(testY)
 
+"""
+Step-1: Load the VGG16 network, ensuring the head FC layer sets are left off
+"""
 
-# load the VGG16 network, ensuring the head FC layer sets are left
-# off
 baseModel = VGG16(
 	weights="imagenet",
 	include_top=False,
 	input_tensor=Input(shape=(224, 224, 3))
 )
 
-# initialize the new head of the network, a set of FC layers
-# followed by a softmax classifier
+"""
+Step-2: Initialize the new head of the network, a set of FC layers
+followed by a softmax classifier
+"""
+
 headModel = FCHeadNet.build(baseModel, len(classNames), 256)
 
 # place the head FC model on top of the base model -- this will
@@ -119,8 +123,10 @@ model.fit_generator(
 # evaluate the network after initialization
 print("[INFO] evaluating after initialization...")
 predictions = model.predict(testX, batch_size=32)
-print(classification_report(testY.argmax(axis=1),
-	predictions.argmax(axis=1), target_names=classNames))
+print(
+	classification_report(testY.argmax(axis=1),
+	predictions.argmax(axis=1), target_names=classNames)
+)
 
 # now that the head FC layers have been trained/initialized, lets
 # unfreeze the final set of CONV layers and make them trainable
@@ -137,8 +143,10 @@ model.compile(
 	metrics=["accuracy"]
 )
 
-# train the model again, this time fine-tuning *both* the final set
-# of CONV layers along with our set of FC layers
+"""
+	Train the model again, this time fine-tuning *both* the final set
+	of CONV layers along with our set of FC layers
+"""
 print("[INFO] fine-tuning model...")
 model.fit_generator(
 	aug.flow(trainX, trainY, batch_size=32),
