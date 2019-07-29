@@ -13,7 +13,7 @@ class FCHeadNet:
 		:param baseModel: base trained model
 		:param classes: number of classes
 		:param D: Number of layers in Dense layer
-		:return:
+		:return: Model with newly constructed head
 		"""
 		headModel = baseModel.output
 		headModel = Flatten(name="flatten")(headModel)
