@@ -101,6 +101,7 @@ they will "NOT" be updated during the training process
 """
 
 for layer in baseModel.layers:
+	# freezing
 	layer.trainable = False
 
 # compile our model (this needs to be done after our setting our
@@ -136,9 +137,13 @@ print(
 	predictions.argmax(axis=1), target_names=classNames)
 )
 
-# now that the head FC layers have been trained/initialized, lets
-# unfreeze the final set of CONV layers and make them trainable
+"""
+Step-6: Now that the head FC layers have been trained/initialized, lets
+unfreeze the final set of CONV layers and make them trainable
+"""
+
 for layer in baseModel.layers[15:]:
+	# unfreezing
 	layer.trainable = True
 
 # for the changes to the model to take affect we need to recompile
@@ -152,7 +157,7 @@ model.compile(
 )
 
 """
-	Train the model again, this time fine-tuning *both* the final set
+	Train the model again, this time fine-tuning "both" the final set
 	of CONV layers along with our set of FC layers
 """
 print("[INFO] fine-tuning model...")
