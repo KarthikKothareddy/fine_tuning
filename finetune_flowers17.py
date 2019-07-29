@@ -67,13 +67,9 @@ data = data.astype("float") / 255.0
 	random_state=42
 )
 
-print("Before lables: {}".format(trainY.shape))
-
 # convert the labels from integers to vectors
 trainY = LabelBinarizer().fit_transform(trainY)
 testY = LabelBinarizer().fit_transform(testY)
-
-print("After lables: {}".format(trainY.shape))
 
 
 # load the VGG16 network, ensuring the head FC layer sets are left
